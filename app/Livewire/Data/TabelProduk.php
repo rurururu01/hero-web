@@ -16,6 +16,7 @@ class TabelProduk extends Component
     public $filter = 'semua';
 
     protected $paginationTheme = 'bootstrap';
+    protected $listeners = ['deleteMakanan' => 'deleteMakanan'];
 
     public function updatingSearch()
     {
@@ -32,7 +33,9 @@ class TabelProduk extends Component
         $this->search = '';
         $this->filter = 'semua';
         $this->resetPage();
-    }    public function confirmDelete($id, $nama)
+    }
+
+    public function confirmDelete($id, $nama)
     {
         $this->dispatch('confirm-delete', 
             title: 'Konfirmasi Hapus',
@@ -48,12 +51,8 @@ class TabelProduk extends Component
             $makanan = Makanan::findOrFail($id);
             $nama = $makanan->nama_barang;
             $makanan->delete();
-            
-            session()->flash('success', "Data '{$nama}' berhasil dihapus!");
-            
-            // Emit event untuk refresh atau show success message
             $this->dispatch('item-deleted', message: "Data '{$nama}' berhasil dihapus!");
-            
+            $this->resetPage();
         } catch (\Exception $e) {
             Log::error('Error deleting makanan: ' . $e->getMessage());
             session()->flash('error', 'Terjadi kesalahan saat menghapus data.');
@@ -64,7 +63,6 @@ class TabelProduk extends Component
     {
         $query = Makanan::query();
 
-        // Search functionality
         if ($this->search) {
             $query->where(function($q) {
                 $q->where('nama_barang', 'like', '%' . $this->search . '%')
@@ -72,7 +70,6 @@ class TabelProduk extends Component
             });
         }
 
-        // Filter functionality
         switch ($this->filter) {
             case 'makanan':
                 $query->where('jenis_barang', 'makanan');
