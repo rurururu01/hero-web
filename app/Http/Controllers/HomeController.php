@@ -135,11 +135,35 @@ class HomeController extends Controller
         $restaurants = [
             'warteg-orens-bahari' => [
                 'name' => 'Warteg Orens Bahari - Tenggilis',
-                'description' => 'Warteg terbaik di Tenggilis dengan berbagai pilihan makanan dan minuman segar',
+                'description' => 'Warteg terbaik di Tenggilis dengan berbagai pilihan makanan dan minuman segar. Menyediakan makanan rumahan dengan harga terjangkau.',
                 'image' => '/images/restaurants/warteg.png',
                 'location' => 'Tenggilis, Surabaya',
                 'phone' => '+62 896-9722-7557',
                 'rating' => 4.5
+            ],
+            'bengis-kitchen' => [
+                'name' => 'Bengis Kitchen - Kutisari',
+                'description' => 'Restoran modern dengan menu fusion yang kreatif. Tempat favorit anak muda dengan suasana nyaman dan instagramable.',
+                'image' => '/images/restaurants/bengis.png',
+                'location' => 'Kutisari, Surabaya',
+                'phone' => '+62 896-9722-7558',
+                'rating' => 4.3
+            ],
+            'bube-heytato' => [
+                'name' => 'Bube x Heytato - Rungkut',
+                'description' => 'Kolaborasi dua brand ternama yang menghadirkan menu unik dan lezat. Spesialisasi kentang goreng dan minuman segar.',
+                'image' => '/images/restaurants/bube.png',
+                'location' => 'Rungkut, Surabaya',
+                'phone' => '+62 896-9722-7559',
+                'rating' => 4.7
+            ],
+            'bakso-asia' => [
+                'name' => 'Bakso dan Mie Ayam Asia Bangsa',
+                'description' => 'Warung legendaris dengan bakso dan mie ayam terlezat di kota. Menu andalan sejak 1995 dengan resep turun temurun.',
+                'image' => '/images/restaurants/asia.png',
+                'location' => 'Asia Bangsa, Surabaya',
+                'phone' => '+62 896-9722-7560',
+                'rating' => 4.6
             ]
         ];
 
