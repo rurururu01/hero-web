@@ -1,185 +1,157 @@
-# Hero Web - Deployment dengan Domain Gratis
+# 🆓 Hero Web - Deploy GRATIS dengan Domain
 
 Repository: https://github.com/rurururu01/hero-web
 
-## ⚠️ GitHub Pages Tidak Mendukung Laravel
+## 🎯 REKOMENDASI #1: Railway.app (100% GRATIS)
 
-GitHub Pages hanya untuk static sites (HTML/CSS/JS). Laravel memerlukan PHP server dan database.
+**Kenapa Railway?**
+✅ Benar-benar GRATIS (500 jam/bulan = ~20 hari)
+✅ Domain gratis: `*.up.railway.app`  
+✅ Database PostgreSQL gratis
+✅ Auto-deploy dari GitHub (sekali setup, selalu update otomatis)
+✅ TIDAK PERLU KARTU KREDIT
+✅ Setup cuma 5 menit
 
-## 🚀 Opsi Deployment Gratis dengan Domain
+---
 
-### 1. Railway.app (Recommended - Gratis + Custom Domain)
+## 📱 Cara Deploy ke Railway (Super Mudah)
 
-**Kelebihan:**
-- Gratis 500 jam/bulan
-- Domain gratis: `*.up.railway.app`
-- Bisa custom domain gratis
-- Auto deploy dari GitHub
-- Include database PostgreSQL gratis
+### Step 1: Daftar Railway (1 menit)
+1. Buka: https://railway.app
+2. Klik **"Login"** atau **"Start a New Project"**
+3. Login pakai **GitHub** (akun rurururu01)
+4. Selesai! Tidak perlu isi form macam-macam
 
-**Langkah Deploy:**
+### Step 2: Deploy Project (2 menit)
+1. Di Railway Dashboard, klik **"New Project"**
+2. Pilih **"Deploy from GitHub repo"**
+3. Authorize Railway untuk akses GitHub
+4. Pilih repository: **`hero-web`**
+5. Railway akan otomatis detect Laravel dan mulai deploy
 
-1. **Daftar di Railway**: https://railway.app
-   - Login dengan GitHub
+### Step 3: Tambah Database (1 menit)
+1. Klik **"New"** → **"Database"** → **"Add PostgreSQL"**
+2. Database akan otomatis terhubung ke app
+3. Tidak perlu setting apa-apa!
 
-2. **Deploy dari GitHub**:
-   - Klik "New Project"
-   - Pilih "Deploy from GitHub repo"
-   - Pilih repository `hero-web`
-
-3. **Tambahkan Database**:
-   - Klik "New" → "Database" → "Add PostgreSQL"
-   - Railway akan auto-configure connection
-
-4. **Set Environment Variables**:
+### Step 4: Set Environment Variables (1 menit)
+1. Klik service "hero-web" → **"Variables"** tab
+2. Tambahkan:
    ```
-   APP_KEY=(generate dengan: php artisan key:generate --show)
+   APP_KEY=base64:GENERATE_INI_NANTI
    APP_ENV=production
    APP_DEBUG=false
-   APP_URL=https://your-app.up.railway.app
-   
-   DB_CONNECTION=pgsql
-   DB_HOST=${{Postgres.PGHOST}}
-   DB_PORT=${{Postgres.PGPORT}}
-   DB_DATABASE=${{Postgres.PGDATABASE}}
-   DB_USERNAME=${{Postgres.PGUSER}}
-   DB_PASSWORD=${{Postgres.PGPASSWORD}}
    ```
+3. **Generate APP_KEY**:
+   - Buka terminal di project lokal
+   - Run: `php artisan key:generate --show`
+   - Copy hasilnya (format: `base64:...`)
+   - Paste ke variable `APP_KEY`
 
-5. **Deploy**:
-   - Railway akan otomatis deploy
-   - Domain: `https://your-app.up.railway.app`
+### Step 5: Deploy & Dapatkan Domain (30 detik)
+1. Railway akan auto-deploy (tunggu ~2 menit)
+2. Klik **"Settings"** → **"Generate Domain"**
+3. Dapat domain GRATIS: `https://hero-web-production-xxxx.up.railway.app`
+4. **SELESAI!** Website sudah online! 🎉
 
-6. **Custom Domain (Opsional)**:
-   - Settings → Domains → Add Custom Domain
-   - Tambahkan CNAME record di DNS provider Anda
-
----
-
-### 2. Heroku (Gratis dengan Domain .herokuapp.com)
-
-**Kelebihan:**
-- Domain gratis: `*.herokuapp.com`
-- Mudah digunakan
-- Bisa custom domain (perlu verifikasi kartu kredit)
-
-**Langkah Deploy:**
-
-1. **Install Heroku CLI**: https://devcenter.heroku.com/articles/heroku-cli
-
-2. **Login dan Create App**:
-   ```bash
-   heroku login
-   cd C:\Users\adity\Downloads\hero_web\hero
-   heroku create hero-web-app
-   ```
-
-3. **Tambahkan PostgreSQL**:
-   ```bash
-   heroku addons:create heroku-postgresql:mini
-   ```
-
-4. **Set Environment**:
-   ```bash
-   heroku config:set APP_KEY=$(php artisan key:generate --show)
-   heroku config:set APP_ENV=production
-   heroku config:set APP_DEBUG=false
-   heroku config:set DB_CONNECTION=pgsql
-   ```
-
-5. **Deploy**:
-   ```bash
-   git push heroku main
-   heroku run php artisan migrate --force
-   ```
-
-6. **Buka App**:
-   ```bash
-   heroku open
-   ```
-   Domain: `https://hero-web-app.herokuapp.com`
+### Step 6: Auto-Deploy Selanjutnya
+- Setiap kali push ke GitHub, Railway otomatis deploy ulang
+- Tidak perlu deploy manual lagi!
 
 ---
 
-### 3. Vercel + PlanetScale (Gratis - Perlu Setup Extra)
+## 💰 Gratis Berapa Lama?
 
-**Kelebihan:**
-- Deployment super cepat
-- Custom domain gratis
-- Database MySQL gratis dari PlanetScale
+**Railway gratis 500 jam per bulan:**
+- Jika website selalu online: ~20 hari
+- Jika traffic rendah: bisa full 30 hari
+- Reset setiap bulan
 
-**Catatan**: Perlu konfigurasi tambahan untuk Laravel di Vercel (serverless).
-
----
-
-### 4. InfinityFree (Hosting PHP Gratis)
-
-**Kelebihan:**
-- Hosting PHP gratis
-- MySQL database gratis
-- Subdomain gratis: `*.infinityfreeapp.com`
-- Bisa custom domain
-
-**Kekurangan:**
-- Ada iklan (bisa dihilangkan)
-- Batasan bandwidth
-
-**Website**: https://infinityfree.net
+**Tips Hemat**:
+- Website akan sleep otomatis saat tidak ada traffic
+- Bangun lagi saat ada visitor (10-20 detik)
+- Cukup untuk project pribadi/portfolio
 
 ---
 
-### 5. 000webhost (PHP Hosting Gratis)
+## 🔄 Update Database via Railway
 
-**Kelebihan:**
-- PHP 7.4/8.0
-- MySQL database
-- 300 MB storage
-- 3 GB bandwidth
+```bash
+# Via Railway CLI (optional)
+railway login
+railway link
+railway run php artisan migrate
+```
 
-**Website**: https://www.000webhost.com
-
----
-
-## 🎯 Rekomendasi
-
-### Untuk Development/Testing:
-**Railway.app** - Paling mudah, auto-deploy dari GitHub, gratis dengan custom domain.
-
-### Untuk Production:
-1. **Railway.app** (Gratis 500 jam/bulan)
-2. **Heroku** (Gratis dengan batasan)
-3. **VPS Murah** (DigitalOcean, Vultr - $5/bulan)
+Atau manual via web:
+1. Railway → Service → Deploy Logs
+2. Database auto-migrate saat deploy
 
 ---
 
-## 📋 Checklist Sebelum Deploy
+## 🔗 Link Penting
 
-- [ ] Generate `APP_KEY` baru
-- [ ] Set `APP_DEBUG=false`
-- [ ] Set `APP_ENV=production`
-- [ ] Konfigurasi database credentials
-- [ ] Run `composer install --no-dev --optimize-autoloader`
-- [ ] Run `npm run build`
-- [ ] Set file permissions (storage, bootstrap/cache)
+- **Deploy ke Railway**: https://railway.app
+- **GitHub Repo**: https://github.com/rurururu01/hero-web
+- **Dokumentasi Railway**: https://docs.railway.app
 
 ---
 
-## 🔗 Links
+## ❓ Troubleshooting
 
-- **Repository**: https://github.com/rurururu01/hero-web
-- **Railway**: https://railway.app
-- **Heroku**: https://www.heroku.com
-- **InfinityFree**: https://infinityfree.net
+### Error: "APP_KEY not set"
+```bash
+# Generate key lokal
+php artisan key:generate --show
+
+# Copy hasil (misal: base64:abc123...)
+# Paste ke Railway Variables → APP_KEY
+```
+
+### Error: Database Connection
+- Railway otomatis inject database variables
+- Cek di Variables tab, pastikan ada `DATABASE_URL`
+- Restart deployment
+
+### Website Sleep/Lambat
+- Normal untuk free tier
+- Website sleep setelah 10 menit tidak ada traffic
+- Wake up otomatis saat ada visitor (~10 detik)
 
 ---
 
-## 💡 Tips
+## 🎁 BONUS: Opsi Gratis Lainnya
 
-1. **Railway** paling direkomendasikan untuk Laravel (paling mudah setup)
-2. Gunakan PostgreSQL untuk Railway/Heroku (sudah include)
-3. Custom domain bisa menggunakan Cloudflare (gratis)
-4. Untuk production serius, pertimbangkan VPS atau shared hosting berbayar
+### InfinityFree (Alternatif jika Railway penuh)
+- **Website**: https://infinityfree.net
+- **Gratis**: PHP, MySQL, 5GB storage
+- **Domain**: subdomain.infinityfreeapp.com
+- **Cara**: Upload files via FTP, setup manual
+
+### 000webhost
+- **Website**: https://www.000webhost.com  
+- **Gratis**: PHP 8.0, MySQL, 300MB storage
+- **Domain**: subdomain.000webhostapp.com
+
+⚠️ **Catatan**: Dua opsi di atas perlu upload manual dan setup lebih rumit. Railway lebih mudah!
 
 ---
 
-**Last Updated**: January 2026
+## 📋 Ringkasan Singkat
+
+**Langkah Deploy ke Railway (5 menit total):**
+
+1. Buka https://railway.app → Login dengan GitHub
+2. New Project → Deploy from GitHub repo → Pilih `hero-web`
+3. Add New → Database → PostgreSQL
+4. Variables → Tambah `APP_KEY` (generate dengan `php artisan key:generate --show`)
+5. Settings → Generate Domain → Selesai!
+
+**Domain gratis**: `https://hero-web-production-xxxx.up.railway.app`
+
+🎉 **Website online dan otomatis update setiap push ke GitHub!**
+
+---
+
+**Last Updated**: January 2026  
+**Repository**: https://github.com/rurururu01/hero-web
